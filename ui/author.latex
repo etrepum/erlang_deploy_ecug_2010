@@ -1,0 +1,6 @@
+\definecolor{rrblitbackground}{rgb}{0.0, 0.0, 0.0}
+
+\title[Deploying Erlang Services at Mochi]{Deploying Erlang Services at Mochi}
+\author[Bob Ippolito]{Bob Ippolito\\Mochi Media, Inc.}
+\institute[ECUG 2010]{ECUG 2010 - Beijing}
+\date{Oct 16, 2010}

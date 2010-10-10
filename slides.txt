@@ -1,0 +1,28 @@
+.. include:: <s5defs.txt>
+.. include:: ui/beamerdefs.txt
+
+.. raw:: html
+    :file: includes/logo.html
+
+====================================
+ Deploying Erlang Services at Mochi 
+====================================
+
+:Author:
+    Bob Ippolito (@etrepum)
+:Date:
+    October 2010
+:Venue:
+    ECUG 2010 (Beijing)
+
+Questions?
+==========
+
+:Twitter:
+  @etrepum
+:Blog:
+  http://bob.pythonmac.org/
+:Mochi Media:
+  http://www.mochimedia.com/
+  
+Mochi is hiring! Contact me: bob@mochimedia.com
