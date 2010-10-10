@@ -1,3 +1,4 @@
+.. -*- mode: rst -*-
 .. include:: <s5defs.txt>
 .. include:: ui/beamerdefs.txt
 
@@ -5,7 +6,7 @@
     :file: includes/logo.html
 
 ====================================
- Deploying Erlang Services at Mochi 
+ Deploying Erlang Services at Mochi
 ====================================
 
 :Author:
@@ -24,5 +25,5 @@ Questions?
   http://bob.pythonmac.org/
 :Mochi Media:
   http://www.mochimedia.com/
-  
-Mochi is hiring! Contact me: bob@mochimedia.com
+:Email:
+  bob@mochimedia.com (we're hiring!)
