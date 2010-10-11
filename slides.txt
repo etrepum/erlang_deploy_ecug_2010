@@ -16,6 +16,89 @@
 :Venue:
     ECUG 2010 (Beijing)
 
+Mochi Media
+===========
+
+* Gaming platform (ads, currency, social, scores, …)
+* Python, JavaScript, Erlang
+* Subsidiary of Shanda Games (盛大游戏)
+* Mochi US (San Francisco) + Mochi China (Shanghai)
+
+Why Erlang
+==========
+
+* Straightforward network programming
+* Multi-core, multi-node
+* Reliable VM and standard library
+* Hot code loading
+* Pattern matching + binaries
+
+How much Erlang
+===============
+
+* 2 internal libraries
+* 18 internal services
+* 10 open source projects (4 by Mochis)
+
+What's not Erlang
+=================
+
+* Most scripts
+* Anything that speaks HTML
+* Anything that speaks to SQL db
+* Off the shelf software (nginx, PostgreSQL, …)
+
+Developer Tools
+===============
+
+* "/mochi" for Mac OS X (localdev) and CentOS (prod)
+* mostly git, actively hunting down legacy svn
+* Erlang R13B04 (R14B soon)
+* Editor of choice (but mostly Emacs-based)
+
+Common Library
+==============
+
+* OTP (of course!)
+* mochierl_lib (internal code + open source as deps)
+* rebar (build tool of choice)
+
+Developer Services (open source)
+================================
+
+:gitweb + cgit:
+    may switch to cgit-only
+:Trac:
+    do not want
+:OpenGrok:
+    code search
+:Hudson:
+    continuous integration
+
+Developer Services (internal)
+=============================
+
+:juanita:
+    IRC bot extraordinaire
+:docportal:
+    Documentation portal. Sphinx + erldocs = win.
+
+What We Don't Use
+=================
+
+:OTP releases:
+    We probably should, for safer upgrade/downgrade
+:Heartbeat:
+    We use daemontools instead, works better for us
+
+What We Avoid
+=============
+
+:Erlang Distribution:
+    Has downsides, we limit it to application clusters by cookie. Use other protocols.
+:Mnesia:
+    Bad at network partitions, but they are inevitable. 2GB limit. Headaches.
+
 Questions?
 ==========
 
@@ -25,5 +108,7 @@ Questions?
   http://bob.pythonmac.org/
 :Mochi Media:
   http://www.mochimedia.com/
+:Mochi Media Open Source:
+  http://mochi.github.com/
 :Email:
   bob@mochimedia.com (we're hiring!)
