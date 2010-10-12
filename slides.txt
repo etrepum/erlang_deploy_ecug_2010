@@ -63,6 +63,14 @@ Common Library
 * mochierl_lib (internal code + open source as deps)
 * rebar (build tool of choice)
 
+Testing Tools
+=============
+
+* eunit
+* effigy
+* meck (a better effigy)
+* ./rebar skip_deps=true eunit
+
 Developer Services (open source)
 ================================
 
@@ -99,6 +107,66 @@ What We Avoid
 :Mnesia:
     Bad at network partitions, but they are inevitable. 2GB limit. Headaches.
 
+What We Should Use
+==================
+
+:RabbitMQ:
+    Nice reliable communication.
+:Riak:
+    Better partition tolerance, fewer problems than mnesia.
+
+Node Naming
+===========
+
+:flavor:
+    localdev, dev, prod
+:service_name:
+    ${app_name}_${flavor}, special case of ${app_name} for prod
+:node name:
+    -name ${service_name}\@${ip_address}
+
+Name-based Decisions
+====================
+
+* -setcookie ${hash of service_name}
+* -connect_all false to force "cluster" isolation
+* app_name embedded in profiler output
+* "IDC Cluster" DNS ${prefix}.erl.${idc}, e.g. app-dev.erl.us1.example.com
+
+DNS based tools
+===============
+
+* Tail all logs from all nodes in a cluster
+* Upgrade code on all nodes in a cluster
+* Get statistics from nodes in a cluster
+* Find all clusters in an IDC
+
+mochinames
+==========
+
+* Abstracts DNS calls, works around bugs
+* Node name, flavor, etc. code
+* Cookies
+
+mochidiscover3
+==============
+
+* Adds node IP A record to IDC cluster DNS
+* Sets node cookie
+* connect_node to nodes in IDC cluster
+
+mochidist
+=========
+
+* Find nodes in an IDC cluster (siblings)
+* Variation of rpc:multicall to prevent stampede
+
+mochideploy
+===========
+
+* Update/build/reload code to local node or IDC cluster
+* Mostly just wraps rebar and git
+
 Questions?
 ==========
 
@@ -106,9 +174,11 @@ Questions?
   @etrepum
 :Blog:
   http://bob.pythonmac.org/
-:Mochi Media:
-  http://www.mochimedia.com/
-:Mochi Media Open Source:
+:Mochi US:
+  http://en.mochimedia.com/
+:Mochi China:
+  http://zh-cn.mochimedia.com/
+:Open Source:
   http://mochi.github.com/
 :Email:
   bob@mochimedia.com (we're hiring!)

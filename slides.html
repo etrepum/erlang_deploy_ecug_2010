@@ -446,6 +446,15 @@ ul.auto-toc {
 <li>rebar (build tool of choice)</li>
 </ul>
 </div>
+<div class="slide" id="testing-tools">
+<h1>Testing Tools</h1>
+<ul class="simple">
+<li>eunit</li>
+<li>effigy</li>
+<li>meck (a better effigy)</li>
+<li>./rebar skip_deps=true eunit</li>
+</ul>
+</div>
 <div class="slide" id="developer-services-open-source">
 <h1>Developer Services (open source)</h1>
 <table class="docutils field-list" frame="void" rules="none">
@@ -503,6 +512,82 @@ ul.auto-toc {
 </tbody>
 </table>
 </div>
+<div class="slide" id="what-we-should-use">
+<h1>What We Should Use</h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">RabbitMQ:</th><td class="field-body">Nice reliable communication.</td>
+</tr>
+<tr class="field"><th class="field-name">Riak:</th><td class="field-body">Better partition tolerance, fewer problems than mnesia.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="node-naming">
+<h1>Node Naming</h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">flavor:</th><td class="field-body">localdev, dev, prod</td>
+</tr>
+<tr class="field"><th class="field-name">service_name:</th><td class="field-body">${app_name}_${flavor}, special case of ${app_name} for prod</td>
+</tr>
+<tr class="field"><th class="field-name">node name:</th><td class="field-body">-name ${service_name}&#64;${ip_address}</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide" id="name-based-decisions">
+<h1>Name-based Decisions</h1>
+<ul class="simple">
+<li>-setcookie ${hash of service_name}</li>
+<li>-connect_all false to force &quot;cluster&quot; isolation</li>
+<li>app_name embedded in profiler output</li>
+<li>&quot;IDC Cluster&quot; DNS ${prefix}.erl.${idc}, e.g. app-dev.erl.us1.example.com</li>
+</ul>
+</div>
+<div class="slide" id="dns-based-tools">
+<h1>DNS based tools</h1>
+<ul class="simple">
+<li>Tail all logs from all nodes in a cluster</li>
+<li>Upgrade code on all nodes in a cluster</li>
+<li>Get statistics from nodes in a cluster</li>
+<li>Find all clusters in an IDC</li>
+</ul>
+</div>
+<div class="slide" id="mochinames">
+<h1>mochinames</h1>
+<ul class="simple">
+<li>Abstracts DNS calls, works around bugs</li>
+<li>Node name, flavor, etc. code</li>
+<li>Cookies</li>
+</ul>
+</div>
+<div class="slide" id="mochidiscover3">
+<h1>mochidiscover3</h1>
+<ul class="simple">
+<li>Adds node IP A record to IDC cluster DNS</li>
+<li>Sets node cookie</li>
+<li>connect_node to nodes in IDC cluster</li>
+</ul>
+</div>
+<div class="slide" id="mochidist">
+<h1>mochidist</h1>
+<ul class="simple">
+<li>Find nodes in an IDC cluster (siblings)</li>
+<li>Variation of rpc:multicall to prevent stampede</li>
+</ul>
+</div>
+<div class="slide" id="mochideploy">
+<h1>mochideploy</h1>
+<ul class="simple">
+<li>Update/build/reload code to local node or IDC cluster</li>
+<li>Mostly just wraps rebar and git</li>
+</ul>
+</div>
 <div class="slide" id="questions">
 <h1>Questions?</h1>
 <table class="docutils field-list" frame="void" rules="none">
@@ -513,10 +598,11 @@ ul.auto-toc {
 </tr>
 <tr class="field"><th class="field-name">Blog:</th><td class="field-body"><a class="reference external" href="http://bob.pythonmac.org/">http://bob.pythonmac.org/</a></td>
 </tr>
-<tr class="field"><th class="field-name">Mochi Media:</th><td class="field-body"><a class="reference external" href="http://www.mochimedia.com/">http://www.mochimedia.com/</a></td>
+<tr class="field"><th class="field-name">Mochi US:</th><td class="field-body"><a class="reference external" href="http://en.mochimedia.com/">http://en.mochimedia.com/</a></td>
 </tr>
-<tr class="field"><th class="field-name">Mochi Media Open Source:</th></tr>
-<tr><td>&nbsp;</td><td class="field-body"><a class="reference external" href="http://mochi.github.com/">http://mochi.github.com/</a></td>
+<tr class="field"><th class="field-name">Mochi China:</th><td class="field-body"><a class="reference external" href="http://zh-cn.mochimedia.com/">http://zh-cn.mochimedia.com/</a></td>
+</tr>
+<tr class="field"><th class="field-name">Open Source:</th><td class="field-body"><a class="reference external" href="http://mochi.github.com/">http://mochi.github.com/</a></td>
 </tr>
 <tr class="field"><th class="field-name">Email:</th><td class="field-body"><a class="reference external" href="mailto:bob&#64;mochimedia.com">bob&#64;mochimedia.com</a> (we're hiring!)</td>
 </tr>
