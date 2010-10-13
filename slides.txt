@@ -69,7 +69,7 @@ Testing Tools
 * eunit
 * effigy
 * meck (a better effigy)
-* ./rebar skip_deps=true eunit
+* ``./rebar skip_deps=true eunit``
 
 Developer Services (open source)
 ================================
@@ -121,17 +121,17 @@ Node Naming
 :flavor:
     localdev, dev, prod
 :service_name:
-    ${app_name}_${flavor}, special case of ${app_name} for prod
+    ``${app_name}_${flavor}``, special case of ``${app_name}`` for prod
 :node name:
-    -name ${service_name}\@${ip_address}
+    ``-name ${service_name}\@${ip_address}``
 
 Name-based Decisions
 ====================
 
-* -setcookie ${hash of service_name}
-* -connect_all false to force "cluster" isolation
+* ``-setcookie ${hash of service_name}``
+* ``-connect_all false`` to force "cluster" isolation
 * app_name embedded in profiler output
-* "IDC Cluster" DNS ${prefix}.erl.${idc}, e.g. app-dev.erl.us1.example.com
+* "IDC Cluster" DNS ``${prefix}.erl.${idc}``, e.g. ``app-dev.erl.us1.example.com``
 
 DNS based tools
 ===============
@@ -166,6 +166,22 @@ mochideploy
 
 * Update/build/reload code to local node or IDC cluster
 * Mostly just wraps rebar and git
+
+Multiple IDC problems
+=====================
+
+* Work in progress
+* China <-> US incredibly difficult
+* Latency and packet loss is high
+* Erlang Distribution absolutely terrible for this
+
+Multiple IDC "solution"
+=======================
+
+* Separate DNS, separate "IDC clusters"
+* Using VPN + HTTP now, investigating RabbitMQ + Shovel
+* Investigating Riak EnterpriseDS replication
+
 
 Questions?
 ==========

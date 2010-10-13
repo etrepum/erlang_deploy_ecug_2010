@@ -452,7 +452,7 @@ ul.auto-toc {
 <li>eunit</li>
 <li>effigy</li>
 <li>meck (a better effigy)</li>
-<li>./rebar skip_deps=true eunit</li>
+<li><tt class="docutils literal">./rebar skip_deps=true eunit</tt></li>
 </ul>
 </div>
 <div class="slide" id="developer-services-open-source">
@@ -533,9 +533,9 @@ ul.auto-toc {
 <tbody valign="top">
 <tr class="field"><th class="field-name">flavor:</th><td class="field-body">localdev, dev, prod</td>
 </tr>
-<tr class="field"><th class="field-name">service_name:</th><td class="field-body">${app_name}_${flavor}, special case of ${app_name} for prod</td>
+<tr class="field"><th class="field-name">service_name:</th><td class="field-body"><tt class="docutils literal"><span class="pre">${app_name}_${flavor}</span></tt>, special case of <tt class="docutils literal">${app_name}</tt> for prod</td>
 </tr>
-<tr class="field"><th class="field-name">node name:</th><td class="field-body">-name ${service_name}&#64;${ip_address}</td>
+<tr class="field"><th class="field-name">node name:</th><td class="field-body"><tt class="docutils literal"><span class="pre">-name</span> <span class="pre">${service_name}\&#64;${ip_address}</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -543,10 +543,10 @@ ul.auto-toc {
 <div class="slide" id="name-based-decisions">
 <h1>Name-based Decisions</h1>
 <ul class="simple">
-<li>-setcookie ${hash of service_name}</li>
-<li>-connect_all false to force &quot;cluster&quot; isolation</li>
+<li><tt class="docutils literal"><span class="pre">-setcookie</span> ${hash of service_name}</tt></li>
+<li><tt class="docutils literal"><span class="pre">-connect_all</span> false</tt> to force &quot;cluster&quot; isolation</li>
 <li>app_name embedded in profiler output</li>
-<li>&quot;IDC Cluster&quot; DNS ${prefix}.erl.${idc}, e.g. app-dev.erl.us1.example.com</li>
+<li>&quot;IDC Cluster&quot; DNS <tt class="docutils literal"><span class="pre">${prefix}.erl.${idc}</span></tt>, e.g. <tt class="docutils literal"><span class="pre">app-dev.erl.us1.example.com</span></tt></li>
 </ul>
 </div>
 <div class="slide" id="dns-based-tools">
@@ -586,6 +586,23 @@ ul.auto-toc {
 <ul class="simple">
 <li>Update/build/reload code to local node or IDC cluster</li>
 <li>Mostly just wraps rebar and git</li>
+</ul>
+</div>
+<div class="slide" id="multiple-idc-problems">
+<h1>Multiple IDC problems</h1>
+<ul class="simple">
+<li>Work in progress</li>
+<li>China &lt;-&gt; US incredibly difficult</li>
+<li>Latency and packet loss is high</li>
+<li>Erlang Distribution absolutely terrible for this</li>
+</ul>
+</div>
+<div class="slide" id="multiple-idc-solution">
+<h1>Multiple IDC &quot;solution&quot;</h1>
+<ul class="simple">
+<li>Separate DNS, separate &quot;IDC clusters&quot;</li>
+<li>Using VPN + HTTP now, investigating RabbitMQ + Shovel</li>
+<li>Investigating Riak EnterpriseDS replication</li>
 </ul>
 </div>
 <div class="slide" id="questions">
