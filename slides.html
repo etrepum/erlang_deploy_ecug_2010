@@ -438,6 +438,15 @@ ul.auto-toc {
 <li>Editor of choice (but mostly Emacs-based)</li>
 </ul>
 </div>
+<div class="slide" id="mochi">
+<h1>&quot;/mochi&quot;</h1>
+<ul class="simple">
+<li>Full pre-built development toolchain</li>
+<li>Erlang R13B04, Python, etc.</li>
+<li>Same structure for CentOS and Mac OS X</li>
+<li>Also includes internal scripts and shell profile</li>
+</ul>
+</div>
 <div class="slide" id="common-library">
 <h1>Common Library</h1>
 <ul class="simple">
@@ -603,6 +612,81 @@ ul.auto-toc {
 <li>Separate DNS, separate &quot;IDC clusters&quot;</li>
 <li>Using VPN + HTTP now, investigating RabbitMQ + Shovel</li>
 <li>Investigating Riak EnterpriseDS replication</li>
+</ul>
+</div>
+<div class="slide" id="mochiprofiler">
+<h1>mochiprofiler</h1>
+<ul class="simple">
+<li>gen_server running in every app</li>
+<li>Implements <tt class="docutils literal">&quot;/stats&quot;</tt> URL in every app</li>
+<li>Tracks app counters in ETS table</li>
+<li>Tracks timings in gb_tree</li>
+<li>Reports on other Erlang info (mnesia, memory, etc.)</li>
+</ul>
+</div>
+<div class="slide" id="hudson">
+<h1>Hudson</h1>
+<ul class="simple">
+<li>Java-based continuous integration software</li>
+<li>Checks out software</li>
+<li>Builds, runs test and coverage suites</li>
+<li>Sends email and IRC alerts of test failure</li>
+<li>VERY USEFUL!</li>
+</ul>
+</div>
+<div class="slide" id="hardware">
+<h1>Hardware</h1>
+<ul class="simple">
+<li>Juniper routers</li>
+<li>Using A10 hardware load balancers</li>
+<li>Virtual IPs forward to Erlang services</li>
+<li>Servers with IPMI</li>
+</ul>
+</div>
+<div class="slide" id="base-platform">
+<h1>Base Platform</h1>
+<ul class="simple">
+<li>CentOS (Linux)</li>
+<li>Puppet</li>
+<li>Daemontools</li>
+<li>OpenNMS</li>
+</ul>
+</div>
+<div class="slide" id="puppet">
+<h1>Puppet</h1>
+<ul class="simple">
+<li>Deploys OS and software to machines</li>
+<li>Manages IDC configuration</li>
+<li>Manages server configuration</li>
+<li>Great to deploy more machines</li>
+<li>Reproducible</li>
+</ul>
+</div>
+<div class="slide" id="puppet-lifecycle">
+<h1>Puppet Lifecycle</h1>
+<ul class="simple">
+<li>Server POST (Power-on self-test)</li>
+<li>PXE boot (Preboot eXecution Environment)</li>
+<li>Wait at prompt for Kickstart or OS boot (Use IPMI console to select)</li>
+<li>OS boot runs Puppet every 30 min</li>
+</ul>
+</div>
+<div class="slide" id="daemontools">
+<h1>Daemontools</h1>
+<ul class="simple">
+<li>Switches UID/GID</li>
+<li>Separate logging/supervision processes</li>
+<li>Restarts services</li>
+<li>Would be nice if Erlang had accessible POSIX signal support</li>
+</ul>
+</div>
+<div class="slide" id="opennms">
+<h1>OpenNMS</h1>
+<ul class="simple">
+<li>Java-based Network Monitoring System</li>
+<li>RRD resource graphs of mochiprofiler data</li>
+<li>Alerts on warnings and outages</li>
+<li>Sends alerts through pages, email, IRC</li>
 </ul>
 </div>
 <div class="slide" id="questions">

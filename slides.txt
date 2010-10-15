@@ -56,6 +56,14 @@ Developer Tools
 * Erlang R13B04 (R14B soon)
 * Editor of choice (but mostly Emacs-based)
 
+"/mochi"
+========
+
+* Full pre-built development toolchain
+* Erlang R13B04, Python, etc.
+* Same structure for CentOS and Mac OS X
+* Also includes internal scripts and shell profile
+
 Common Library
 ==============
 
@@ -182,6 +190,72 @@ Multiple IDC "solution"
 * Using VPN + HTTP now, investigating RabbitMQ + Shovel
 * Investigating Riak EnterpriseDS replication
 
+mochiprofiler
+=============
+
+* gen_server running in every app
+* Implements ``"/stats"`` URL in every app
+* Tracks app counters in ETS table
+* Tracks timings in gb_tree
+* Reports on other Erlang info (mnesia, memory, etc.)
+
+Hudson
+======
+
+* Java-based continuous integration software
+* Checks out software
+* Builds, runs test and coverage suites
+* Sends email and IRC alerts of test failure
+* VERY USEFUL!
+
+Hardware
+========
+
+* Juniper routers
+* Using A10 hardware load balancers
+* Virtual IPs forward to Erlang services
+* Servers with IPMI
+
+Base Platform
+=============
+
+* CentOS (Linux)
+* Puppet
+* Daemontools
+* OpenNMS
+
+Puppet
+======
+
+* Deploys OS and software to machines
+* Manages IDC configuration
+* Manages server configuration
+* Great to deploy more machines
+* Reproducible
+
+Puppet Lifecycle
+================
+
+* Server POST (Power-on self-test)
+* PXE boot (Preboot eXecution Environment)
+* Wait at prompt for Kickstart or OS boot (Use IPMI console to select)
+* OS boot runs Puppet every 30 min
+
+Daemontools
+===========
+
+* Switches UID/GID
+* Separate logging/supervision processes
+* Restarts services
+* Would be nice if Erlang had accessible POSIX signal support
+
+OpenNMS
+=======
+
+* Java-based Network Monitoring System
+* RRD resource graphs of mochiprofiler data
+* Alerts on warnings and outages
+* Sends alerts through pages, email, IRC
 
 Questions?
 ==========
