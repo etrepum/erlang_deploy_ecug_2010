@@ -396,14 +396,15 @@ ul.auto-toc {
 <div class="slide" id="mochi-media">
 <h1>Mochi Media</h1>
 <ul class="simple">
-<li>Gaming platform (ads, currency, social, scores, …)</li>
-<li>Python, JavaScript, Erlang</li>
+<li>Gaming platform (monetization, social, …)</li>
+<li>Erlang, Python, JavaScript, ActionScript 2 and 3</li>
 <li>Subsidiary of Shanda Games (盛大游戏)</li>
-<li>Mochi US (San Francisco) + Mochi China (Shanghai)</li>
+<li>Mochi US (San Francisco)</li>
+<li>Mochi China (Shanghai)</li>
 </ul>
 </div>
 <div class="slide" id="why-erlang">
-<h1>Why Erlang</h1>
+<h1>Why Erlang?</h1>
 <ul class="simple">
 <li>Straightforward network programming</li>
 <li>Multi-core, multi-node</li>
@@ -447,11 +448,12 @@ ul.auto-toc {
 <li>Also includes internal scripts and shell profile</li>
 </ul>
 </div>
-<div class="slide" id="common-library">
-<h1>Common Library</h1>
+<div class="slide" id="erlang-common-library">
+<h1>Erlang Common Library</h1>
 <ul class="simple">
 <li>OTP (of course!)</li>
-<li>mochierl_lib (internal code + open source as deps)</li>
+<li>mochierl_lib (internal)</li>
+<li>open source dependencies (mochiweb, …)</li>
 <li>rebar (build tool of choice)</li>
 </ul>
 </div>
@@ -464,90 +466,98 @@ ul.auto-toc {
 <li><tt class="docutils literal">./rebar skip_deps=true eunit</tt></li>
 </ul>
 </div>
+<div class="slide" id="rebar">
+<h1>Rebar</h1>
+<ul class="simple">
+<li>Each project gets a rebar.config</li>
+<li>Dependencies all on internal git</li>
+<li>Internal git mirrors of open source projects, updated daily</li>
+<li>Some config customizations</li>
+</ul>
+</div>
+<div class="slide" id="rebar-config">
+<h1>rebar.config</h1>
+<pre class="literal-block">
+{erl_opts, [debug_info]}.
+{deps, […]}.
+{cover_enabled, true}.
+{eunit_opts,
+  [verbose,
+   {report,{eunit_surefire,[{dir,&quot;.&quot;}]}}]}.
+{mib_opts, [{group_check, false}]}.
+</pre>
+</div>
+<div class="slide" id="future-rebar">
+<h1>Future Rebar</h1>
+<ul class="simple">
+<li>Better support for having internal mirrors of open source</li>
+<li>Support for updating dependencies in-place like mochideploy</li>
+<li>We should use it for project templates</li>
+<li>Maybe use it for migrating towards OTP releases</li>
+</ul>
+</div>
 <div class="slide" id="developer-services-open-source">
 <h1>Developer Services (open source)</h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field"><th class="field-name">gitweb + cgit:</th><td class="field-body">may switch to cgit-only</td>
-</tr>
-<tr class="field"><th class="field-name">Trac:</th><td class="field-body">do not want</td>
-</tr>
-<tr class="field"><th class="field-name">OpenGrok:</th><td class="field-body">code search</td>
-</tr>
-<tr class="field"><th class="field-name">Hudson:</th><td class="field-body">continuous integration</td>
-</tr>
-</tbody>
-</table>
+<ul class="simple">
+<li><strong>gitweb + cgit</strong>:
+may switch to cgit-only</li>
+<li><strong>Trac</strong>:
+do not want</li>
+<li><strong>OpenGrok</strong>:
+code search</li>
+<li><strong>Hudson</strong>:
+continuous integration</li>
+</ul>
 </div>
 <div class="slide" id="developer-services-internal">
 <h1>Developer Services (internal)</h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field"><th class="field-name">juanita:</th><td class="field-body">IRC bot extraordinaire</td>
-</tr>
-<tr class="field"><th class="field-name">docportal:</th><td class="field-body">Documentation portal. Sphinx + erldocs = win.</td>
-</tr>
-</tbody>
-</table>
+<ul class="simple">
+<li><strong>juanita</strong>:
+IRC bot extraordinaire</li>
+<li><strong>docportal</strong>:
+Documentation (Sphinx and erldocs)</li>
+</ul>
 </div>
 <div class="slide" id="what-we-don-t-use">
 <h1>What We Don't Use</h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field"><th class="field-name">OTP releases:</th><td class="field-body">We probably should, for safer upgrade/downgrade</td>
-</tr>
-<tr class="field"><th class="field-name">Heartbeat:</th><td class="field-body">We use daemontools instead, works better for us</td>
-</tr>
-</tbody>
-</table>
+<ul class="simple">
+<li><strong>OTP releases</strong>:
+We probably should, for safer upgrade/downgrade</li>
+<li><strong>Heartbeat</strong>:
+We use daemontools instead, works better for us</li>
+</ul>
 </div>
 <div class="slide" id="what-we-avoid">
 <h1>What We Avoid</h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field"><th class="field-name">Erlang Distribution:</th></tr>
-<tr><td>&nbsp;</td><td class="field-body">Has downsides, we limit it to application clusters by cookie. Use other protocols.</td>
-</tr>
-<tr class="field"><th class="field-name">Mnesia:</th><td class="field-body">Bad at network partitions, but they are inevitable. 2GB limit. Headaches.</td>
-</tr>
-</tbody>
-</table>
+<ul class="simple">
+<li><strong>Erlang RPC</strong>:
+Significant downsides, we limit it to application clusters by
+cookie. Use other protocols.</li>
+<li><strong>Mnesia</strong>:
+Bad at network partitions, but they are inevitable.
+2GB limit. Headaches.</li>
+</ul>
 </div>
 <div class="slide" id="what-we-should-use">
 <h1>What We Should Use</h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field"><th class="field-name">RabbitMQ:</th><td class="field-body">Nice reliable communication.</td>
-</tr>
-<tr class="field"><th class="field-name">Riak:</th><td class="field-body">Better partition tolerance, fewer problems than mnesia.</td>
-</tr>
-</tbody>
-</table>
+<ul class="simple">
+<li><strong>RabbitMQ</strong>:
+Nice reliable communication.</li>
+<li><strong>Riak</strong>:
+Better partition tolerance, fewer problems than mnesia.</li>
+</ul>
 </div>
 <div class="slide" id="node-naming">
 <h1>Node Naming</h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field"><th class="field-name">flavor:</th><td class="field-body">localdev, dev, prod</td>
-</tr>
-<tr class="field"><th class="field-name">service_name:</th><td class="field-body"><tt class="docutils literal"><span class="pre">${app_name}_${flavor}</span></tt>, special case of <tt class="docutils literal">${app_name}</tt> for prod</td>
-</tr>
-<tr class="field"><th class="field-name">node name:</th><td class="field-body"><tt class="docutils literal"><span class="pre">-name</span> <span class="pre">${service_name}\&#64;${ip_address}</span></tt></td>
-</tr>
-</tbody>
-</table>
+<ul class="simple">
+<li><strong>flavor</strong>:
+localdev, dev, prod</li>
+<li><strong>service_name</strong>:
+<tt class="docutils literal"><span class="pre">${app_name}_${flavor}</span></tt>,
+special case of <tt class="docutils literal">${app_name}</tt> for prod</li>
+<li><strong>node name</strong>:
+<tt class="docutils literal"><span class="pre">-name</span> <span class="pre">${service_name}\&#64;${ip_address}</span></tt></li>
+</ul>
 </div>
 <div class="slide" id="name-based-decisions">
 <h1>Name-based Decisions</h1>
@@ -634,6 +644,14 @@ ul.auto-toc {
 <li>VERY USEFUL!</li>
 </ul>
 </div>
+<div class="slide" id="udplog-scribe">
+<h1>UDPLog + Scribe</h1>
+<ul class="simple">
+<li>UDPLog is our simple JSON over UDP logging protocol</li>
+<li>Scribe streams and aggregates log data from UDPLog</li>
+<li>OpenNMS graphs data collected by Scribe</li>
+</ul>
+</div>
 <div class="slide" id="hardware">
 <h1>Hardware</h1>
 <ul class="simple">
@@ -643,8 +661,8 @@ ul.auto-toc {
 <li>Servers with IPMI</li>
 </ul>
 </div>
-<div class="slide" id="base-platform">
-<h1>Base Platform</h1>
+<div class="slide" id="ops-platform">
+<h1>Ops Platform</h1>
 <ul class="simple">
 <li>CentOS (Linux)</li>
 <li>Puppet</li>
@@ -689,6 +707,32 @@ ul.auto-toc {
 <li>Sends alerts through pages, email, IRC</li>
 </ul>
 </div>
+<div class="slide" id="git-workflow">
+<h1>Git Workflow</h1>
+<ul class="simple">
+<li>Work in branch based on ticket, e.g. feature-1234</li>
+<li>Push branch to central repository</li>
+<li>Re-assign ticket for code review and verify</li>
+<li>If code passes, merge to master and deploy</li>
+</ul>
+</div>
+<div class="slide" id="code-review">
+<h1>Code Review</h1>
+<ul class="simple">
+<li>Currently done manually by asking in Trac</li>
+<li>Reviewer responsible for generating good diffs</li>
+<li>cgit is better than gitweb for this purpose</li>
+<li>Looking at software to help, e.g. Rietveld or Gerrit</li>
+</ul>
+</div>
+<div class="slide" id="future-workflow">
+<h1>Future Workflow</h1>
+<ul class="simple">
+<li>Require tests to pass with Hudson? Integrate Dialyzer?</li>
+<li>Require code review to pass with Gerrit?</li>
+<li>A work in progress, we switched to Git this year</li>
+</ul>
+</div>
 <div class="slide" id="questions">
 <h1>Questions?</h1>
 <table class="docutils field-list" frame="void" rules="none">
@@ -705,10 +749,11 @@ ul.auto-toc {
 </tr>
 <tr class="field"><th class="field-name">Open Source:</th><td class="field-body"><a class="reference external" href="http://mochi.github.com/">http://mochi.github.com/</a></td>
 </tr>
-<tr class="field"><th class="field-name">Email:</th><td class="field-body"><a class="reference external" href="mailto:bob&#64;mochimedia.com">bob&#64;mochimedia.com</a> (we're hiring!)</td>
+<tr class="field"><th class="field-name">Email:</th><td class="field-body"><a class="reference external" href="mailto:bob&#64;mochimedia.com">bob&#64;mochimedia.com</a></td>
 </tr>
 </tbody>
 </table>
+<p>(we're hiring!)</p>
 </div>
 </div>
 </body>

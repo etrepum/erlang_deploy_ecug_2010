@@ -19,13 +19,14 @@
 Mochi Media
 ===========
 
-* Gaming platform (ads, currency, social, scores, …)
-* Python, JavaScript, Erlang
+* Gaming platform (monetization, social, …)
+* Erlang, Python, JavaScript, ActionScript 2 and 3
 * Subsidiary of Shanda Games (盛大游戏)
-* Mochi US (San Francisco) + Mochi China (Shanghai)
+* Mochi US (San Francisco)
+* Mochi China (Shanghai)
 
-Why Erlang
-==========
+Why Erlang?
+===========
 
 * Straightforward network programming
 * Multi-core, multi-node
@@ -64,11 +65,12 @@ Developer Tools
 * Same structure for CentOS and Mac OS X
 * Also includes internal scripts and shell profile
 
-Common Library
-==============
+Erlang Common Library
+=====================
 
 * OTP (of course!)
-* mochierl_lib (internal code + open source as deps)
+* mochierl_lib (internal)
+* open source dependencies (mochiweb, …)
 * rebar (build tool of choice)
 
 Testing Tools
@@ -79,59 +81,91 @@ Testing Tools
 * meck (a better effigy)
 * ``./rebar skip_deps=true eunit``
 
+Rebar
+=====
+
+* Each project gets a rebar.config
+* Dependencies all on internal git
+* Internal git mirrors of open source projects, updated daily
+* Some config customizations
+
+rebar.config
+============
+
+::
+
+    {erl_opts, [debug_info]}.
+    {deps, […]}.
+    {cover_enabled, true}.
+    {eunit_opts,
+      [verbose,
+       {report,{eunit_surefire,[{dir,"."}]}}]}.
+    {mib_opts, [{group_check, false}]}.
+
+Future Rebar
+============
+
+* Better support for having internal mirrors of open source
+* Support for updating dependencies in-place like mochideploy
+* We should use it for project templates
+* Maybe use it for migrating towards OTP releases
+
 Developer Services (open source)
 ================================
 
-:gitweb + cgit:
-    may switch to cgit-only
-:Trac:
-    do not want
-:OpenGrok:
-    code search
-:Hudson:
-    continuous integration
+* **gitweb + cgit**:
+  may switch to cgit-only
+* **Trac**:
+  do not want
+* **OpenGrok**:
+  code search
+* **Hudson**:
+  continuous integration
 
 Developer Services (internal)
 =============================
 
-:juanita:
-    IRC bot extraordinaire
-:docportal:
-    Documentation portal. Sphinx + erldocs = win.
+* **juanita**:
+  IRC bot extraordinaire
+* **docportal**:
+  Documentation (Sphinx and erldocs)
 
 What We Don't Use
 =================
 
-:OTP releases:
-    We probably should, for safer upgrade/downgrade
-:Heartbeat:
-    We use daemontools instead, works better for us
+* **OTP releases**:
+  We probably should, for safer upgrade/downgrade
+* **Heartbeat**:
+  We use daemontools instead, works better for us
 
 What We Avoid
 =============
 
-:Erlang Distribution:
-    Has downsides, we limit it to application clusters by cookie. Use other protocols.
-:Mnesia:
-    Bad at network partitions, but they are inevitable. 2GB limit. Headaches.
+* **Erlang RPC**:
+  Significant downsides, we limit it to application clusters by
+  cookie. Use other protocols.
+* **Mnesia**:
+  Bad at network partitions, but they are inevitable.
+  2GB limit. Headaches.
 
 What We Should Use
 ==================
 
-:RabbitMQ:
-    Nice reliable communication.
-:Riak:
-    Better partition tolerance, fewer problems than mnesia.
+* **RabbitMQ**:
+  Nice reliable communication.
+* **Riak**:
+  Better partition tolerance, fewer problems than mnesia.
 
 Node Naming
 ===========
 
-:flavor:
-    localdev, dev, prod
-:service_name:
-    ``${app_name}_${flavor}``, special case of ``${app_name}`` for prod
-:node name:
-    ``-name ${service_name}\@${ip_address}``
+* **flavor**:
+  localdev, dev, prod
+* **service_name**:
+  ``${app_name}_${flavor}``,
+  special case of ``${app_name}`` for prod
+* **node name**:
+  ``-name ${service_name}\@${ip_address}``
 
 Name-based Decisions
 ====================
@@ -208,6 +242,13 @@ Hudson
 * Sends email and IRC alerts of test failure
 * VERY USEFUL!
 
+UDPLog + Scribe
+===============
+
+* UDPLog is our simple JSON over UDP logging protocol
+* Scribe streams and aggregates log data from UDPLog
+* OpenNMS graphs data collected by Scribe
+
 Hardware
 ========
 
@@ -216,8 +257,8 @@ Hardware
 * Virtual IPs forward to Erlang services
 * Servers with IPMI
 
-Base Platform
-=============
+Ops Platform
+============
 
 * CentOS (Linux)
 * Puppet
@@ -257,6 +298,29 @@ OpenNMS
 * Alerts on warnings and outages
 * Sends alerts through pages, email, IRC
 
+Git Workflow
+============
+
+* Work in branch based on ticket, e.g. feature-1234
+* Push branch to central repository
+* Re-assign ticket for code review and verify
+* If code passes, merge to master and deploy
+
+Code Review
+===========
+
+* Currently done manually by asking in Trac
+* Reviewer responsible for generating good diffs
+* cgit is better than gitweb for this purpose
+* Looking at software to help, e.g. Rietveld or Gerrit
+
+Future Workflow
+===============
+
+* Require tests to pass with Hudson? Integrate Dialyzer?
+* Require code review to pass with Gerrit?
+* A work in progress, we switched to Git this year
+
 Questions?
 ==========
 
@@ -271,4 +335,6 @@ Questions?
 :Open Source:
   http://mochi.github.com/
 :Email:
-  bob@mochimedia.com (we're hiring!)
+  bob@mochimedia.com
+
+(we're hiring!)
